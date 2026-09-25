@@ -57,7 +57,9 @@ jobs:
           images: |
             ${{ env.DOCKERHUB_IMAGE }}
             ${{ steps.ecr.outputs.registry && format('{0}/{1}', steps.ecr.outputs.registry, env.ECR_REPOSITORY) || '' }}
-          tags: type=raw,value=latest
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
 
       - name: Build and push
         uses: docker/build-push-action@v6
